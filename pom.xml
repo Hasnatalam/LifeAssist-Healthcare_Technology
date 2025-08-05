@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.lifeassist</groupId>
+  <artifactId>lifeassist</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>LifeAssist Parent Project</name>
+  <description>Parent POM for LifeAssist Microservices Platform</description>
+
+  <!-- 📦 Modules to include (add more as needed) -->
+  <modules>
+    <module>infrastructure/eureka-server</module>
+    <module>infrastructure/api-gateway</module>
+    <module>infrastructure/config-server</module>
+
+    <module>microservices/user-service</module>
+    <module>microservices/caregiver-service</module>
+    <module>microservices/health-service</module>
+    <module>microservices/scheduling-service</module>
+    <module>microservices/emergency-service</module>
+    <module>microservices/communication-service</module>
+    <module>microservices/billing-service</module>
+    <module>microservices/reporting-service</module>
+    <module>microservices/admin-service</module>
+  </modules>
+
+  <!-- 🔁 Common Versions -->
+  <properties>
+    <java.version>17</java.version>
+    <spring.boot.version>3.2.4</spring.boot.version>
+    <spring.cloud.version>2023.0.1</spring.cloud.version>
+  </properties>
+
+  <!-- 📦 Dependency Management -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- Spring Boot BOM -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Cloud BOM -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- ⚙️ Plugin Management -->
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Spring Boot Plugin -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

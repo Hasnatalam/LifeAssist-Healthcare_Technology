@@ -1,0 +1,21 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: lifeassist-discovery-service
+
+eureka:
+  client:
+    register-with-eureka: false   # This server won't register itself
+    fetch-registry: false         # It won't fetch registry (it's the registry itself)
+  server:
+    wait-time-in-ms-when-sync-empty: 0  # No delay in registry sync
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
