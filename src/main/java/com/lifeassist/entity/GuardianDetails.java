@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GurdianDetails {
+public class GuardianDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,6 +41,8 @@ public class GurdianDetails {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
+    
+    private Long caretakerId;
     
     @Builder.Default
     @OneToMany(mappedBy = "gurdian", cascade = CascadeType.ALL, orphanRemoval = true)

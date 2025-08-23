@@ -92,7 +92,8 @@ public class User implements UserDetails {
     private CaregiverDetails caregiverDetails;
     
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private GurdianDetails gurdianDetails;
+    private GuardianDetails guardianDetails;
+    
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address = new ArrayList<>();

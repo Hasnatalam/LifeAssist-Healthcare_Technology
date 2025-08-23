@@ -91,5 +91,5 @@ public class CareServiceBooking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gurdian_id", nullable = false)
-    private GurdianDetails gurdian;
+    private GuardianDetails gurdian;
 }

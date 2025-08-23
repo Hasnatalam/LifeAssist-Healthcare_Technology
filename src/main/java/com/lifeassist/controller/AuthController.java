@@ -2,6 +2,7 @@ package com.lifeassist.controller;
 
 import com.lifeassist.dto.AuthRequest;
 import com.lifeassist.dto.AuthResponse;
+import com.lifeassist.dto.GuardianRegisterRequest;
 import com.lifeassist.dto.RegisterRequest;
 import com.lifeassist.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,12 @@ public class AuthController {
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(userService.register(request));
     }
-
+    
+    @PostMapping("/register-gurdian")
+    public ResponseEntity<AuthResponse> registerGurdian(@RequestBody GuardianRegisterRequest request) {
+        return ResponseEntity.ok(userService.register(request));
+    }
+    
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         return ResponseEntity.ok(userService.authenticate(request.getEmail(), request.getPassword()));
