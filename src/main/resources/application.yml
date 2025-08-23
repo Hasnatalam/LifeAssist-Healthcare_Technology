@@ -1,0 +1,47 @@
+# application.yml
+spring:
+  application:
+    name: LifeAssist-Healthcare_Technology
+
+  profiles:
+    active: dev  # Change to 'prod' to switch environment
+
+---
+
+# Development Profile (MySQL)
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/lifeassist
+    username: root
+    password: Hasnat@2516
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+server:
+  port: 8090
+
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000
+
+logging:
+  level:
+    com.lifeassist: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+---
+
+# Production Profile (Example)
