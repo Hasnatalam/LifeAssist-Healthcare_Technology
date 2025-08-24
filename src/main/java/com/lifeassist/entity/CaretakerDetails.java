@@ -19,14 +19,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "caretaker_details")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@RequiredArgsConstructor
 public class CaretakerDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,6 @@ public class CaretakerDetails {
 
     private int age;
     private String bloodGroup;
-    private int pulse;
     private String bp;
     @CreationTimestamp
     @Column(updatable = false)
@@ -52,7 +51,4 @@ public class CaretakerDetails {
     @OneToMany(mappedBy = "caretakerDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CaretakerDisease> diseases = new ArrayList<>();
     
-//    @Builder.Default
-//    @OneToMany(mappedBy = "caretaker", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<CareServiceBooking> careServiceBooking = new ArrayList<>();
 }

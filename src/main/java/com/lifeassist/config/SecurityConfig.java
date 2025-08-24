@@ -29,12 +29,14 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
             	    // Swagger & API docs - allow without authentication
-            	    .requestMatchers(
-            	        "/swagger-ui/**",
-            	        "/v3/api-docs/**",
-            	        "/swagger-resources/**",
-            	        "/webjars/**"
-            	    ).permitAll()
+            		/*
+            		.requestMatchers(
+            			    "/swagger-ui/**",
+            			    "/v3/api-docs/**",
+            			    "/swagger-resources/**",
+            			    "/webjars/**"
+            			).permitAll()
+            			*/
 
             	    // Auth APIs (login/register)
             	    .requestMatchers("/api/auth/**").permitAll()

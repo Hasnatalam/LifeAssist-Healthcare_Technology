@@ -1,4 +1,9 @@
 package com.lifeassist.entity;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +28,12 @@ public class CaretakerDisease {
     private Long id;
 
     private String diseaseName;
+    
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "caretaker_detail_id", nullable = false)
