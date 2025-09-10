@@ -1,17 +1,20 @@
 package com.lifeassist.controller;
 
+import java.net.HttpURLConnection;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lifeassist.entity.Address;
-import com.lifeassist.entity.CaregiverDetails;
+import com.lifeassist.dto.CaregiverDetailsRequest;
+import com.lifeassist.dto.CaregiverDetailsResponse;
+import com.lifeassist.dto.ResponseMessage;
 import com.lifeassist.entity.User;
 import com.lifeassist.service.CaregiverService;
+import com.lifeassist.utility.Constants;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,24 +25,16 @@ import lombok.RequiredArgsConstructor;
 public class CaregiverController {
 	private final CaregiverService careGiverService;
 	
-	@GetMapping("/check")
-	public String check() {
-		return "Welcome to Caregiver Controller";
-	}
+
 	@PostMapping("/saveDetails")
-	public ResponseEntity<String> saveCaretakerDetails(@RequestBody CaregiverDetails caregiverDetails,Authentication authentication){
+	public ResponseEntity<ResponseMessage> saveCaretakerDetails(@RequestBody CaregiverDetailsRequest caregiverDetails,Authentication authentication){
 		User user= (User)authentication.getPrincipal();
-		CaregiverDetails savesaveCaregiverDetails = careGiverService.saveCaregiverDetails(caregiverDetails, user);
 		
-		return ResponseEntity.ok("Caretaker details saved "+user.getEmail()+" "+savesaveCaregiverDetails.getAge()+" "+savesaveCaregiverDetails.getExperienceYears()+" "+savesaveCaregiverDetails.getSpecialization());
+		CaregiverDetailsResponse savesaveCaregiverDetails = careGiverService.saveCaregiverDetails(caregiverDetails, user);
+		
+		return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_OK, Constants.SUCCESS, "Caretaker details saved", savesaveCaregiverDetails));
 	}
 	
-	@PostMapping("/addAddress")
-	public ResponseEntity<String> addAddress(@RequestBody Address address, Authentication authentication){
-		User user= (User)authentication.getPrincipal();
-		Address savedAddress = careGiverService.addAddress(address, user);
-		return ResponseEntity.ok("Caretaker details saved "+user.getEmail()+" "+savedAddress.getLocality()+" "+savedAddress.getArea()
-		+" "+savedAddress.getDistrict()+" "+savedAddress.getState()+" "+savedAddress.getCountry()+" "+savedAddress.getPinCode());
-	}
+
 	
 }

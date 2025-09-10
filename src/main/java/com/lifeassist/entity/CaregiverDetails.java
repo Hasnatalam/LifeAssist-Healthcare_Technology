@@ -1,20 +1,16 @@
 package com.lifeassist.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,6 +32,7 @@ public class CaregiverDetails {
     private int experienceYears;
     private String specialization;
     private int age;
+    private Double fee;
     
     @CreationTimestamp
     @Column(updatable = false)
@@ -48,7 +45,4 @@ public class CaregiverDetails {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
     
-    @Builder.Default
-    @OneToMany(mappedBy = "caregiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CareServiceBooking> careServiceBooking = new ArrayList<>();
-}
+    }

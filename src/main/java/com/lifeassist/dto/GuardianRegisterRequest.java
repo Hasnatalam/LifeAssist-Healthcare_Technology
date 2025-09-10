@@ -17,5 +17,5 @@ public class GuardianRegisterRequest {
     private String firstName;
     private String lastName;
     private Role role;
-    private String  gurdianUsername;
+    private String  caretakerUsername;
 }

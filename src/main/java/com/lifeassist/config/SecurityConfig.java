@@ -29,14 +29,14 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
             	    // Swagger & API docs - allow without authentication
-            		/*
+            		
             		.requestMatchers(
             			    "/swagger-ui/**",
             			    "/v3/api-docs/**",
             			    "/swagger-resources/**",
             			    "/webjars/**"
             			).permitAll()
-            			*/
+            			
 
             	    // Auth APIs (login/register)
             	    .requestMatchers("/api/auth/**").permitAll()
@@ -44,8 +44,7 @@ public class SecurityConfig {
             	    // Role-based APIs
             	    .requestMatchers("/api/admin/**").hasRole("ADMIN")
             	    .requestMatchers("/api/caregiver/**").hasAnyRole("CAREGIVER", "ADMIN")
-            	    .requestMatchers("/api/caretaker/**").hasAnyRole("CARETAKER", "ADMIN")
-            	    .requestMatchers("/api/guardian/**").hasAnyRole("GUARDIAN", "ADMIN")
+            	    .requestMatchers("/api/caretaker/**").hasAnyRole("CARETAKER", "ADMIN", "GUARDIAN")
 
             	    // Everything else requires authentication
             	    .anyRequest().authenticated()

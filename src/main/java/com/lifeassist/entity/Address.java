@@ -25,6 +25,7 @@ public class Address {
     private String state;
     private String country;
     private int pinCode;
+    private boolean isPrimary;
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -33,6 +34,6 @@ public class Address {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

@@ -4,7 +4,7 @@ import com.lifeassist.dto.AuthRequest;
 import com.lifeassist.dto.AuthResponse;
 import com.lifeassist.dto.GuardianRegisterRequest;
 import com.lifeassist.dto.RegisterRequest;
-import com.lifeassist.service.UserService;
+import com.lifeassist.service.UserAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final UserService userService;
+    private final UserAuthService userService;
     
     @GetMapping("/check")
     public String healthCheck() {

@@ -1,20 +1,16 @@
 package com.lifeassist.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -44,7 +40,4 @@ public class GuardianDetails {
     
     private Long caretakerId;
     
-    @Builder.Default
-    @OneToMany(mappedBy = "gurdian", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CareServiceBooking> careServiceBooking = new ArrayList<>();
 }

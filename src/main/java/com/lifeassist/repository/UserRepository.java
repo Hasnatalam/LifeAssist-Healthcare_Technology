@@ -1,13 +1,17 @@
 package com.lifeassist.repository;
 
-import com.lifeassist.entity.User;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.lifeassist.entity.Role;
+import com.lifeassist.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
+    List<User> findDistinctByAddress_AreaAndAddress_IsPrimaryTrueAndRole(String area, Role role);
 }

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.lifeassist.entity.CaretakerDetails;
 @Repository
-public interface CaretakerRepository extends JpaRepository<CaretakerDetails, Integer>{
+public interface CaretakerRepository extends JpaRepository<CaretakerDetails, Long>{
 
 }

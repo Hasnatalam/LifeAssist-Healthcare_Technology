@@ -1,0 +1,17 @@
+package com.lifeassist.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CaregiverDetailsRequest {
+	private int experienceYears;
+	private String specialization;
+	private int age;
+	private Double fee;
+}

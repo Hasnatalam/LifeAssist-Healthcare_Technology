@@ -1,5 +1,8 @@
 package com.lifeassist.controller;
 
+import java.net.HttpURLConnection;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lifeassist.entity.Address;
-import com.lifeassist.entity.CaretakerDetails;
+import com.lifeassist.dto.BookingRequest;
+import com.lifeassist.dto.BookingResponse;
+import com.lifeassist.dto.CaregiverResponse;
+import com.lifeassist.dto.CaretakerDetailsRequest;
+import com.lifeassist.dto.CaretakerDetailsResponse;
+import com.lifeassist.dto.ResponseMessage;
 import com.lifeassist.entity.User;
 import com.lifeassist.service.CaretakerService;
+import com.lifeassist.utility.Constants;
 
 import lombok.RequiredArgsConstructor;
 @RestController
@@ -25,20 +33,25 @@ public class CaretakerController {
 		return "Welcome to Caretaker Controller";
 	}
 	@PostMapping("/saveDetails")
-	public ResponseEntity<String> saveCaretakerDetails(@RequestBody CaretakerDetails caretakerDetails,Authentication authentication){
+	public ResponseEntity<ResponseMessage> saveCaretakerDetails(@RequestBody CaretakerDetailsRequest caretakerDetailsReq,Authentication authentication){
 		User user= (User)authentication.getPrincipal();
-		CaretakerDetails saveCaretakerDetails = caretakerService.saveCaretakerDetails(caretakerDetails, user);
+		CaretakerDetailsResponse saveCaretakerDetails = caretakerService.saveCaretakerDetails(caretakerDetailsReq, user);
 		
-		return ResponseEntity.ok("Caretaker details saved "+user.getEmail()+" "+saveCaretakerDetails.getAge()+" "+saveCaretakerDetails.getBloodGroup()+" "+saveCaretakerDetails.getBp() );
+		return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_OK, Constants.SUCCESS, "Caretaker details saved",saveCaretakerDetails));
 	}
-	
-	@PostMapping("/addAddress")
-	public ResponseEntity<String> addAddress(@RequestBody Address address, Authentication authentication){
+	@GetMapping("/getAllCaretaker")
+	public List<CaregiverResponse> getAllCaretakers(Authentication authentication){
 		User user= (User)authentication.getPrincipal();
-		Address savedAddress = caretakerService.addAddress(address, user);
-		return ResponseEntity.ok("Caretaker details saved "+user.getEmail()+" "+savedAddress.getLocality()+" "+savedAddress.getArea()
-		+" "+savedAddress.getDistrict()+" "+savedAddress.getState()+" "+savedAddress.getCountry()+" "+savedAddress.getPinCode());
+		
+		
+		return caretakerService.getAllCaregiver(user);
 	}
 	
+	@PostMapping("/book")
+	public ResponseEntity<ResponseMessage> bookCaregiver(@RequestBody BookingRequest bookingRequest, Authentication authentication){
+		User user= (User)authentication.getPrincipal();
+		BookingResponse bookedCaregiver = caretakerService.bookCaregiver(user, bookingRequest);
+		return ResponseEntity.ok(new ResponseMessage(HttpURLConnection.HTTP_OK, Constants.SUCCESS, "Caretaker details saved",bookedCaregiver));
+	}
 	
 }

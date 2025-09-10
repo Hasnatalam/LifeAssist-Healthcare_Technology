@@ -125,5 +125,17 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+    @Builder.Default
+    @OneToMany(mappedBy = "caregiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CareServiceBooking> caregiverBookingDetails = new ArrayList<>();
+    
+    @Builder.Default
+    @OneToMany(mappedBy = "caretaker", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CareServiceBooking> caretakerBookingDetails = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "guardian", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CareServiceBooking> guardianBookingDetails = new ArrayList<>();
+
     
 }
